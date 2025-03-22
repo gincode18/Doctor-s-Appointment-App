@@ -13,8 +13,11 @@ function MyBooking() {
         user&&getUserBookingList();
     },[user])
     const getUserBookingList=()=>{
+        console.log("yaha dekh ")
+        console.log(user?.email)
         GlobalApi.getUserBookingList(user?.email).then(resp=>{
-            console.log(resp.data.data)
+            console.log("yaha dekh ")
+            console.log(resp.data.data);
             setBookingList(resp.data.data);
         })
     }
@@ -26,8 +29,8 @@ function MyBooking() {
      */
     const filterUserBooking=(type)=>{
         const result=bookingList.filter(item=>
-           type=='upcoming'? new Date(item.attributes.Date)>=new Date()
-           :new Date(item.attributes.Date)<=new Date()
+           type=='upcoming'? new Date(item.Date)>=new Date()
+           :new Date(item.Date)<=new Date()
             )
             console.log(result)
         return result;

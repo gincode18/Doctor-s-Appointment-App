@@ -11,9 +11,15 @@ function Details({params}) {
     getDoctorById();
   },[])
   const getDoctorById=()=>{
+    console.log("Record ID:", params.recordId);
     GlobalApi.getDoctorById(params.recordId).then(resp=>{
-      setDoctor(resp.data.data);
+      console.log("Doctor Detail");
+      console.log(resp.data);
+      setDoctor(resp.data);
     })
+    .catch(error => {
+      console.error("Error fetching doctor:", error);
+    });
   }
   return (
     <div className='p-5 md:px-10'>

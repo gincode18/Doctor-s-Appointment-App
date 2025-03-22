@@ -32,7 +32,7 @@ function DoctorDetail({doctor}) {
     <div className='grid grid-cols-1 md:grid-cols-3 border-[1px] p-5 mt-5 rounded-lg'>
           {/* Doctor Image  */}
           <div>
-              <Image src={doctor.attributes?.image?.data?.attributes?.url}
+              <Image src={doctor.image?.url || doctor.image?.formats?.thumbnail?.url}
               width={200}
               height={200}
               alt='doctor-image'
@@ -41,17 +41,17 @@ function DoctorDetail({doctor}) {
           </div>
           {/* Doctor Info  */}
           <div className='col-span-2 mt-5 flex md:px-10 flex-col gap-3 items-baseline'>
-                <h2 className='font-bold text-2xl'>{doctor.attributes?.Name}</h2>
+                <h2 className='font-bold text-2xl'>{doctor.Name}</h2>
                 <h2 className='flex gap-2 text-gray-500 text-md'>
                     <GraduationCap/>
-                    <span>{doctor.attributes?.Year_of_Experience} of Experince</span>
+                    <span>{doctor.Year_of_Experience} of Experince</span>
                 </h2>
                 <h2 className='text-md flex gap-2 text-gray-500'>
                     <MapPin/>
-                    <span>{doctor.attributes.Address}</span>
+                    <span>{doctor.Address}</span>
                 </h2>
                 <h2 className='text-[10px] bg-blue-100 p-1 rounded-full
-                        px-2 text-primary'>{doctor.attributes?.categories.data[0].attributes?.Name}</h2>
+                        px-2 text-primary'>{doctor.categories?.[0]?.Name}</h2>
 
                 <div className='flex gap-3'>
                     {socialMediaList.map((item,index)=>(
@@ -70,7 +70,7 @@ function DoctorDetail({doctor}) {
         </div>
          <div className='p-3 border-[1px] rounded-lg mt-5'>
          <h2 className='font-bold text-[20px]'>About Me</h2>
-         <p className='text-gray-500 tracking-wide mt-2'>{doctor.attributes.About}</p>
+         <p className='text-gray-500 tracking-wide mt-2'>{doctor.About}</p>
        </div>
        </>
   )

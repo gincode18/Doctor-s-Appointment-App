@@ -22,46 +22,53 @@ import {
     UserName,
     Email,
     Time,
-    Date,
+    date,
     doctor,
     Note
-  }) => (
-    <Html>
-      <Head />
-      <Preview>
-        The sales intelligence platform that helps you uncover qualified leads.
-      </Preview>
-      <Body style={main}>
-        <Container style={container}>
-          <Img
-            src={`${baseUrl}/logo.svg`}
-            width="170"
-            height="50"
-            alt="Koala"
-            style={logo}
-          />
-          <Text style={paragraph}>Hi {UserName},</Text>
-          <Text style={paragraph}>
-           Your Appointment with Doctor has booked on {Date} at {Time}
-          </Text>
-          {/* <Section style={btnContainer}>
-            <Button style={button} href="https://getkoala.com">
-              Get started
-            </Button>
-          </Section> */}
-          <Text style={paragraph}>
-            Best,
-            <br />
-            Tubeguruji App 
-          </Text>
-          <Hr style={hr} />
-          <Text style={footer}>
-            Developed by TubeGuruji!
-          </Text>
-        </Container>
-      </Body>
-    </Html>
-  );
+  }) => {
+    // Format date string if it's a date object or ISO string
+    const formattedDate = date ? new Date(date).toLocaleDateString() : 'N/A';
+    
+    return (
+      <Html>
+        <Head />
+        <Preview>
+          Your Appointment Confirmation with Doctor
+        </Preview>
+        <Body style={main}>
+          <Container style={container}>
+            <Img
+              src={`${baseUrl}/logo.svg`}
+              width="170"
+              height="50"
+              alt="Doctor App"
+              style={logo}
+            />
+            <Text style={paragraph}>Hi {UserName},</Text>
+            <Text style={paragraph}>
+             Your Appointment with Doctor has been booked on {formattedDate} at {Time}
+            </Text>
+            <Section>
+              <Text style={detailsHeader}>Appointment Details:</Text>
+              <Text style={detailsItem}>Date: {formattedDate}</Text>
+              <Text style={detailsItem}>Time: {Time}</Text>
+              {doctor && <Text style={detailsItem}>Doctor ID: {doctor}</Text>}
+              {Note && <Text style={detailsItem}>Note: {Note}</Text>}
+            </Section>
+            <Text style={paragraph}>
+              Best,
+              <br />
+              Doctor's Appointment App 
+            </Text>
+            <Hr style={hr} />
+            <Text style={footer}>
+              Developed by Kartik Gupta ❤️!
+            </Text>
+          </Container>
+        </Body>
+      </Html>
+    );
+  };
   
 
   
@@ -110,5 +117,17 @@ import {
   const footer = {
     color: "#8898aa",
     fontSize: "12px",
+  };
+
+  const detailsHeader = {
+    fontSize: "16px",
+    fontWeight: "bold",
+    marginBottom: "8px",
+  };
+
+  const detailsItem = {
+    fontSize: "14px",
+    lineHeight: "24px",
+    margin: "4px 0",
   };
   

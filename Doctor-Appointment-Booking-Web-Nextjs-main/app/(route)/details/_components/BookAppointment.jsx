@@ -65,8 +65,22 @@ function BookAppointment({doctor}) {
         console.log(resp);
         if(resp)
         {
-          GlobalApi.sendEmail(data).then(resp=>{
-            console.log(resp)
+          // Format email data properly to match the template
+          const emailData = {
+            UserName: user.given_name + " " + (user.family_name || ""),
+            Email: user.email,
+            Time: selectedTimeSlot,
+            date: date,
+            doctor: doctor.id,
+            Note: note
+          };
+          
+          GlobalApi.sendEmail(emailData).then(resp=>{
+            console.log("Email sent");
+            console.log('====================================');
+            console.log(emailData);
+            console.log('====================================');
+            console.log(resp);
           })
           toast("Booking Confirmation sent on Email")
         }

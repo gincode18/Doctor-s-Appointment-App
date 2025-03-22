@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 
 function DoctorList({doctorList,heading='Popular Doctors'}) {
+    console.log("doctorList")
+    console.log(doctorList)
   return (
     <div className='mb-10 px-8'>
         <h2 className='font-bold text-xl'>
@@ -17,7 +19,7 @@ function DoctorList({doctorList,heading='Popular Doctors'}) {
                 cursor-pointer hover:border-primary
                 hover:shadow-sm transition-all ease-in-out'
                 key={index}>
-                    <Image src={doctor.attributes?.image?.data?.attributes?.url}
+                    <Image src={doctor.image?.url || doctor.image?.formats?.thumbnail?.url}
                     alt='doctor'
                     width={500}
                     height={200}
@@ -25,11 +27,11 @@ function DoctorList({doctorList,heading='Popular Doctors'}) {
                     />
                     <div className='mt-3 items-baseline flex flex-col gap-1'>
                         <h2 className='text-[10px] bg-blue-100 p-1 rounded-full
-                        px-2 text-primary'>{doctor.attributes?.categories.data[0].attributes?.Name}</h2>
-                        <h2 className='font-bold'>{doctor.attributes.Name}</h2>
-                        <h2 className='text-primary text-sm'>{doctor.attributes?.Year_of_Experience}</h2>
-                        <h2 className='text-gray-500 text-sm'>{doctor.attributes?.Address}</h2>
-                        <Link href={'/details/'+doctor?.id} className='w-full'>
+                        px-2 text-primary'>{doctor.categories?.[0]?.Name}</h2>
+                        <h2 className='font-bold'>{doctor.Name}</h2>
+                        <h2 className='text-primary text-sm'>{doctor.Year_of_Experience}</h2>
+                        <h2 className='text-gray-500 text-sm'>{doctor.Address}</h2>
+                        <Link href={'/details/'+doctor?.documentId} className='w-full'>
                         <h2 className='p-2 px-3 border-[1px] border-primary
                         text-primary rounded-full w-full text-center
                         text-[11px] mt-2
