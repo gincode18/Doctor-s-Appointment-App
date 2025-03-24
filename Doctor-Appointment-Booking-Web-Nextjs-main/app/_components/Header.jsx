@@ -39,9 +39,9 @@ function Header() {
     <div className='flex items-center 
     justify-between p-4 shadow-sm'>
         <div className='flex items-center gap-10'>
-            <Image src='/logo.svg' alt='logo'
+            {/* <Image src='/logo.svg' alt='logo'
             width={180} height={80}
-            />
+            /> */}
             <ul className='md:flex gap-8 hidden'>
                 {Menu.map((item,index)=>(
                     <Link href={item.path} key={index}>
