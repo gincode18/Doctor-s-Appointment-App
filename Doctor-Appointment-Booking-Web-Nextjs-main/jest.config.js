@@ -5,7 +5,18 @@ module.exports = {
   setupFiles: ['<rootDir>/jest.setup.js'],
   // Transform ESM to CJS
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(js|jsx)$': ['babel-jest', {
+      presets: [
+        ['@babel/preset-env', { 
+          targets: { node: 'current' },
+          modules: 'commonjs'
+        }],
+        '@babel/preset-react'
+      ],
+      plugins: [
+        '@babel/plugin-transform-modules-commonjs'
+      ]
+    }]
   },
   // Indicate which files to test
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
